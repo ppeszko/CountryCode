@@ -1,13 +1,13 @@
 [
 {
-"name": "Liechtenstein",
-"dial_code": "+423",
-"code": "LI"
-},
-{
 "name": "Switzerland",
 "dial_code": "+41",
 "code": "CH"
+},
+{
+"name": "Liechtenstein",
+"dial_code": "+423",
+"code": "LI"
 },
 {
 "name": "Afghanistan",
