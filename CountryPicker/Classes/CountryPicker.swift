@@ -48,11 +48,7 @@ struct Country {
 
 open class CountryPicker: UIPickerView, UIPickerViewDelegate, UIPickerViewDataSource {
     
-    var countries: [Country]! {
-        didSet {
-            print("countries set \(countries.count)")
-        }
-    }
+    var countries: [Country]!
     open weak var countryPickerDelegate: CountryPickerDelegate?
     open var showPhoneNumbers: Bool = true
     private var locale = "DE"
