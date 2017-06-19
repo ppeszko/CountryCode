@@ -48,9 +48,14 @@ struct Country {
 
 open class CountryPicker: UIPickerView, UIPickerViewDelegate, UIPickerViewDataSource {
     
-    var countries: [Country]!
+    var countries: [Country]! {
+        didSet {
+            print("countries set \(countries.count)")
+        }
+    }
     open weak var countryPickerDelegate: CountryPickerDelegate?
     open var showPhoneNumbers: Bool = true
+    private var locale = "DE"
     
     /// init
     ///
@@ -93,6 +98,11 @@ open class CountryPicker: UIPickerView, UIPickerViewDelegate, UIPickerViewDataSo
             countryPickerDelegate.countryPhoneCodePicker(self, didSelectCountryWithName: country.name!, countryCode: country.code!, phoneCode: country.phoneCode!, flag: country.flag!)
         }
     }
+
+    open func setLocale(locale: String) {
+        self.locale = locale
+        setup()
+    }
     
     /// setCountryByPhoneCode
     /// Init with phone code
@@ -121,7 +131,7 @@ open class CountryPicker: UIPickerView, UIPickerViewDelegate, UIPickerViewDataSo
     func countryNamesByCode() -> [Country] {
         var countries = [Country]()
         let frameworkBundle = Bundle(for: type(of: self))
-        guard let jsonPath = frameworkBundle.path(forResource: "CountryPicker.bundle/Data/countryCodes", ofType: "json"), let jsonData = try? Data(contentsOf: URL(fileURLWithPath: jsonPath)) else {
+        guard let jsonPath = frameworkBundle.path(forResource: "CountryPicker.bundle/Data/countryCodes.\(locale)", ofType: "json"), let jsonData = try? Data(contentsOf: URL(fileURLWithPath: jsonPath)) else {
             return countries
         }
         
